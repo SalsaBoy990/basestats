@@ -1,0 +1,29 @@
+{
+  "name": "basestats",
+  "version": "1.0.0",
+  "description": "A function that calculates basic statistics from arrays, array-like objects",
+  "main": "basestats.js",
+  "scripts": {
+    "test": "node ./test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SalsaBoy990/basestats.git"
+  },
+  "keywords": [
+    "statistics",
+    "percentile",
+    "boxplot",
+    "array",
+    "array-like object"
+  ],
+  "author": "András Gulácsi",
+  "license": "MIT",
+  "dependencies": {
+    "standard": "^10.0.3"
+  },
+  "bugs": {
+    "url": "https://github.com/SalsaBoy990/basestats/issues"
+  },
+  "homepage": "https://github.com/SalsaBoy990/basestats#readme"
+}
