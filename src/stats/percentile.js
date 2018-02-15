@@ -1,4 +1,4 @@
-const utils = require('./utilities')
+const utils = require('../utilities/pc-utils')
 
 // These statistics are needed to create a boxplot
 module.exports = {
