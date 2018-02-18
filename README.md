@@ -13,139 +13,137 @@ I recommend inspecting and running the scripts in the **Testing** part. Especial
 
 ### Simple example
 
-    ```javascript
-    const $S = require('basestats')
+```javascript
+const $S = require('basestats')
 
-    let sample = [5, 13, 27, 6, 9, 13, 20, 2, 9, -100, 335]
+let sample = [5, 13, 27, 6, 9, 13, 20, 2, 9, -100, 335]
 
-    let person = [
-      {
-        age: 44,
-        height: 182 /* in cm */
-      },
-      {
-        age: 32,
-        height: 196
-      },
-      {
-        age: 23,
-        height: 169
-      },
-      {
-        age: 55,
-        height: 176
-      },
-      {
-        age: 14,
-        height: 155
-      },
-      {
-        age: 200,
-        height: 200
-      }
-    ]
+let person = [
+  {
+    age: 44,
+    height: 182 /* in cm */
+  },
+  {
+    age: 32,
+    height: 196
+  },
+  {
+    age: 23,
+    height: 169
+  },
+  {
+    age: 55,
+    height: 176
+  },
+  {
+    age: 14,
+    height: 155
+  },
+  {
+    age: 200,
+    height: 200
+  }
+]
 
-    // get percentile values from the array of numbers
-    let pcs = $S.getAllPercentiles(sample)
-    console.log('sample: ', pcs)
+// get percentile values from the array of numbers
+let pcs = $S.getAllPercentiles(sample)
+console.log('sample: ', pcs)
 
-    // save the percentile results to file
-    $S.saveToCSV('./results/sample.csv', pcs, ['Percentile', 'Value'], ';')
+// save the percentile results to file
+$S.saveToCSV('./results/sample.csv', pcs, ['Percentile', 'Value'], ';')
 
-    // get basic stats from the array of numbers, save it
-    let arr = $S.getBaseStats($S.vars, sample)
-    $S.saveToCSV('./results/arr.csv', arr, ['Statistics', 'Value'], ';')
-    console.log('arr: ', arr)
+// get basic stats from the array of numbers, save it
+let arr = $S.getBaseStats($S.vars, sample)
+$S.saveToCSV('./results/arr.csv', arr, ['Statistics', 'Value'], ';')
+console.log('arr: ', arr)
 
-    // calculate stats from the 'age' property of the 'person' object, save it
-    let age = $S.getBaseStats($S.vars, $S.subsetByProperty(person, 'age'))
-    $S.saveToCSV('./results/age.csv', age, ['Statistics', 'Value'], ';')
-    console.log('person (age): ', age)
+// calculate stats from the 'age' property of the 'person' object, save it
+let age = $S.getBaseStats($S.vars, $S.subsetByProperty(person, 'age'))
+$S.saveToCSV('./results/age.csv', age, ['Statistics', 'Value'], ';')
+console.log('person (age): ', age)
 
-    // log the stats from the 'height' property of the 'person' object
-    console.log('person (height): ', $S.getBaseStats($S.vars, $S.subsetByProperty(person, 'height')))
-
-    ```
+// log the stats from the 'height' property of the 'person' object
+console.log('person (height): ', $S.getBaseStats($S.vars, $S.subsetByProperty(person, 'height')))
+```
 
 ### JSON from URL example
 
-    ```javascript
-    const $S = require('basestats')
+```javascript
+const $S = require('basestats')
 
-    $S.getJSONFromURL('http://jsonvat.com/', function (err, body) {
-      if (err) throw err
+$S.getJSONFromURL('http://jsonvat.com/', function (err, body) {
+  if (err) throw err
 
-      let parsed = JSON.parse(body)
-      parsed = $S.subsetByProperty(parsed.rates, 'periods')
+  let parsed = JSON.parse(body)
+  parsed = $S.subsetByProperty(parsed.rates, 'periods')
 
-      // get standard VAT values; there is a 2d array in the object!
-      let vat = parsed.map(function (item) {
-        return item[0].rates.standard
-      })
+  // get standard VAT values; there is a 2d array in the object!
+  let vat = parsed.map(function (item) {
+    return item[0].rates.standard
+  })
 
-      // get basic stats from VAT values
-      let stats = $S.getBaseStats($S.vars, vat)
+  // get basic stats from VAT values
+  let stats = $S.getBaseStats($S.vars, vat)
 
-      // save results to a file
-      $S.saveToCSV('./results/vat.csv', stats, ['Statistics', 'Value'], ';')
-    })
-
-    ```
+  // save results to a file
+  $S.saveToCSV('./results/vat.csv', stats, ['Statistics', 'Value'], ';')
+})
+```
 
 ### MongoDB example
 
 You need to have the the data in the Mongo database. See the **Testing** part for detailed information!
 
-    ```javascript
-    const mongoose = require('mongoose')
-    const $S = require('basestats')
+```javascript
+const mongoose = require('mongoose')
 
-    // Connect to the database, you need to add error handling...
-    mongoose.connect('mongodb://localhost/basestats-demo')
+const $S = require('basestats')
 
-    // create a schema for a subdocument that is an embedded object
-    let dateSchema = mongoose.Schema({ $date: 'Date' })
+// Connect to the database, you need to add error handling...
+mongoose.connect('mongodb://localhost/basestats-demo')
 
-    // Create a schema for the books data, this is the structure of the database
-    let bookSchema = mongoose.Schema({
-      title: String,
-      isbn: String,
-      pageCount: Number,
-      publishedDate: dateSchema, // you can embed schema into a schema
-      thumbnailUrl: String,
-      shortDescription: String,
-      longDescription: String,
-      status: String,
-      authors: [String],
-      categories: [String]
-    })
+// create a schema for a subdocument that is an embedded object
+let dateSchema = mongoose.Schema({ $date: 'Date' })
 
-    // Create the model
-    let bookModel = mongoose.model('bookModel', bookSchema, 'books')
+// Create a schema for the books data, this is the structure of the database
+let bookSchema = mongoose.Schema({
+  title: String,
+  isbn: String,
+  pageCount: Number,
+  publishedDate: dateSchema, // you can embed schema into a schema
+  thumbnailUrl: String,
+  shortDescription: String,
+  longDescription: String,
+  status: String,
+  authors: [String],
+  categories: [String]
+})
 
-    // Query all of the books, but return only the id, title, and pageCount properties
-    let query = bookModel.find({}, { _id: 1, title: 1, pageCount: 1 })
-      .sort({ title: 'asc' }) // sort by the title
+// Create the model
+let bookModel = mongoose.model('bookModel', bookSchema, 'books')
 
-    // Calculate stats from the number of pages property, and export it into CSV
-    query.exec(function (err, data) {
-      if (err) throw err
-      console.log(data)
+// Query all of the books, but return only the id, title, and pageCount properties
+let query = bookModel.find({}, { _id: 1, title: 1, pageCount: 1 })
+  .sort({ title: 'asc' }) // sort by the title
 
-      // We need an array to work with
-      let pageCount = data.map(function (item) {
-        return item['pageCount']
-      })
-      console.log(pageCount)
+// Calculate stats from the number of pages property, and export it into CSV
+query.exec(function (err, data) {
+  if (err) throw err
+  console.log(data)
 
-      // get basic stats for the number of pages
-      let stats = $S.getBaseStats($S.vars, pageCount)
+  // We need an array to work with
+  let pageCount = data.map(function (item) {
+    return item['pageCount']
+  })
+  console.log(pageCount)
 
-      // save results to a file
-      $S.saveToCSV('./results/bookPageCount.csv', stats, ['Statistics', 'Value'], ';')
-    })
+  // get basic stats for the number of pages
+  let stats = $S.getBaseStats($S.vars, pageCount)
 
-    ```
+  // save results to a file
+  $S.saveToCSV('./results/bookPageCount.csv', stats, ['Statistics', 'Value'], ';')
+})
+```
 
 ## Run the examples above
 
