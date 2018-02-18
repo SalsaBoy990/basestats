@@ -25,6 +25,6 @@ module.exports = function (filename, dataToSave, header, deliminator) {
   // Save result in .csv
   fs.writeFile(filename, save.join('\n'), 'utf-8', (err) => {
     if (err) throw err
-    console.log('A fájl sikeresen elmentve ' + filename + ' néven!')
+    console.log('Data successfully saved as ' + filename + '.')
   })
 }

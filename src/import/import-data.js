@@ -1,5 +1,8 @@
 const request = require('request')
 
+// Args:
+// url: the location of the JSON file
+// first-error callback: the function invoked after file has been read
 function getJSONFromURL (url, callback) {
   // check url needed...
   request(url, { json: true }, function (error, response, body) {
@@ -12,7 +15,7 @@ function getJSONFromURL (url, callback) {
 
 // Makes a subset of an array of objects by an object property.
 // Added to the prototype of getJSONFromURL() function
-getJSONFromURL.prototype.subsetByProperty = function (obj, prop) {
+/* getJSONFromURL.prototype.subsetByProperty = function (obj, prop) {
   if (prop) {
     return obj.map(function (item) {
       return item[prop]
@@ -20,7 +23,7 @@ getJSONFromURL.prototype.subsetByProperty = function (obj, prop) {
   } else {
     return null
   }
-}
+} */
 
 // Add a method to a function, a different approach
 // getJSONFromURL.subsetByProperty = subsetByProperty

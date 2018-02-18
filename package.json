@@ -2,9 +2,12 @@
   "name": "basestats",
   "version": "1.0.0",
   "description": "A function that calculates basic statistics from arrays, array-like objects",
-  "main": "basestats.js",
+  "main": "main.js",
   "scripts": {
-    "test": "node ./test/test.js"
+    "example-simple": "node ./example/example-simple.js",
+    "example-json": "node ./example/example-json.js",
+    "db-sample": "node ./example/mongo-database-sample.js",
+    "example-mongo": "node ./example/example-mongo.js"
   },
   "repository": {
     "type": "git",
@@ -15,11 +18,15 @@
     "percentile",
     "boxplot",
     "array",
-    "array-like object"
+    "array-like object",
+    "save to CSV",
+    "JSON from URL",
+    "MongoDB"
   ],
   "author": "András Gulácsi",
   "license": "MIT",
   "dependencies": {
+    "mongoose": "^5.0.6",
     "request": "^2.83.0",
     "standard": "^10.0.3"
   },

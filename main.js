@@ -20,7 +20,32 @@ function variance (data) {
 function stdev (data) { return Math.sqrt(variance(data)) }
 
 module.exports = {
+  // Statistical properties that you can calculate with basestats
+  vars: [
+    'min',
+    'max',
+    'sum',
+    'amean', // arithmetic mean
+    'Q1',
+    'median',
+    'Q3',
+    'outliers',
+    'variance',
+    'stdev'
+  ],
+
+  // Args:
+  // stats: array containing the stats to calculate see the 'vars' property above
+  // data: array containing the data to calculate stats from
+  // error handling needs enhancements...
   getBaseStats: function (stats, data) {
+    if (arguments.length === 0) {
+      throw new Error('You did not supply all the arguments.')
+    }
+    if (!isArray(stats) || !isArray(data)) {
+      throw new Error('Arguments of array type needed')
+    }
+
     let result = {}
     let str
     for (let i = 0; i < stats.length; i++) {
@@ -62,11 +87,31 @@ module.exports = {
     return result
   },
 
+  // Get the percentiles from 0 to 100
+  // Arg: data: array containing the data to calculate stats from
   getAllPercentiles: function (data) {
     let result = {}
     for (let i = 0; i < 100; i++) {
       result[i] = pc.percentile(data, i)
     }
     return result
-  }
+  },
+
+   // Makes a subset of an array of objects by an object property.
+   // Args: obj: the object; prop: the object property we need to subset
+  subsetByProperty: function (obj, prop) {
+    if (prop) {
+      return obj.map(function (item) {
+        return item[prop]
+      })
+    } else {
+      return null
+    }
+  },
+
+  // Save results into a CSV file, different separators are available
+  saveToCSV: require('./src/export/save-csv'),
+
+  // Get JSON from an URL.
+  getJSONFromURL: require('./src/import/import-data')
 }
