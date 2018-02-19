@@ -9,9 +9,9 @@
 
 ## Usage
 
-I recommend inspecting and running the scripts in the **Testing** part. Especially the MongoDB part!
+I recommend inspecting and running the scripts in the **Example** part. Especially the MongoDB part!
 
-### Simple example
+### Simple arrays and objects
 
 ```javascript
 const $S = require('basestats')
@@ -66,7 +66,7 @@ console.log('person (age): ', age)
 console.log('person (height): ', $S.getBaseStats($S.vars, $S.subsetByProperty(person, 'height')))
 ```
 
-### JSON from URL example
+### JSON from URL
 
 ```javascript
 const $S = require('basestats')
@@ -90,9 +90,9 @@ $S.getJSONFromURL('http://jsonvat.com/', function (err, body) {
 })
 ```
 
-### MongoDB example
+### MongoDB
 
-You need to have the the data in the Mongo database. See the **Testing** part for detailed information!
+You need to have the the data in the Mongo database. See the **Example** part for detailed information!
 
 ```javascript
 const mongoose = require('mongoose')
@@ -145,7 +145,8 @@ query.exec(function (err, data) {
 })
 ```
 
-## Run the examples above
+
+## Examples
 
 Navigate to `node_modules\basestats\example` in your project folder, and run
 
@@ -155,27 +156,24 @@ Navigate to `node_modules\basestats\example` in your project folder, and run
 to calculate stats from simple arrays, objects, and JSON.
 
 For the MongoDB example, follow these instructions:
-1. Get JSON data from url, save it as a json file by running this script
-    npm mongo-database-sample
+1. Get JSON data from url, save it as a json file by running this script: `npm mongo-database-sample`
 
 2. After that you have to import this file to the mongo database. Run this command (in one line):
   `mongoimport -db basestats-demo --collection books --type json --file books.json`
 
 3. And finally, run `npm example-mongo`. Otherwise, this example won't work!
 
-Note: I use the module called **mongoose** for the example. However, you need to have mongo installed on your computer. Just in case if you are new to MongoDB:
+Note: I use the module called **mongoose** for the example. However, you need to have mongo installed on your computer. Just in case you are new to MongoDB:
 
 ### Install MongoDB on your computer
 
-*[Download the installer](https://www.mongodb.org/dl/win32/x86_64-2008plus-ssl). I use this version on Windows 7: 
+* [Download the installer](https://www.mongodb.org/dl/win32/x86_64-2008plus-ssl). I use this version on Windows 7: 
 
-mongodb-win32-x86_64-2008plus-ssl-3.2.9-signed.msi
+`mongodb-win32-x86_64-2008plus-ssl-3.2.9-signed.msi`
 
 * Install it in a folder like this: `C:\mongodb`
 * Create the following folders inside `C:\mongodb`: `data/db` and `log`
-* Add `C:\mongodb\bin` to the PATH variable if needed, or go to the directory and 
-
-run this command:
+* Add `C:\mongodb\bin` to the PATH variable if needed, or go to the directory and run this command:
 
 `mongod --directoryperdb --dbpath C:\mongodb\data\db --logpath C:\mongodb\log\mongo.log --logappend --install`
 
@@ -196,6 +194,7 @@ run this command:
 
 ## Release Notes
 
+* 1.0.1 Module restructured
 * 1.0.0 Initial release
 
 ## License

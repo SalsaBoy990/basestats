@@ -1,10 +1,13 @@
 const request = require('request')
 
+module.exports = getJSONFromURL
+
+// Get JSON from an URL.
 // Args:
 // url: the location of the JSON file
 // first-error callback: the function invoked after file has been read
 function getJSONFromURL (url, callback) {
-  // check url needed...
+  // checking url needed...
   request(url, { json: true }, function (error, response, body) {
     if (error && response.statusCode !== 200) {
       callback(error, null)
@@ -12,20 +15,3 @@ function getJSONFromURL (url, callback) {
     callback(null, JSON.stringify(body))
   })
 }
-
-// Makes a subset of an array of objects by an object property.
-// Added to the prototype of getJSONFromURL() function
-/* getJSONFromURL.prototype.subsetByProperty = function (obj, prop) {
-  if (prop) {
-    return obj.map(function (item) {
-      return item[prop]
-    })
-  } else {
-    return null
-  }
-} */
-
-// Add a method to a function, a different approach
-// getJSONFromURL.subsetByProperty = subsetByProperty
-
-module.exports = getJSONFromURL

@@ -2,24 +2,17 @@ const utils = require('../utilities/pc-utils')
 
 // These statistics are needed to create a boxplot
 module.exports = {
-  // Gets outliers that are outside of the range of Q3 + 1.5*IQR, and Q1 - 1.5*IQR
   getOutliers: getOutliers,
-
-  // Calculate the n-th percentile.
   percentile: percentile,
-
-  // Calculates the 25th percentile (Q1)
   firstQuartile: firstQuartile,
-
-  // Calculates the 75th percentile (Q3)
-  thirdQuartile: thirdQuartile,
-
-  // Calculates the 50th percentile (median, Q2)
-  median: function (arr) { return percentile(arr, 50) }
+  median: median,
+  thirdQuartile: thirdQuartile
 }
 
 // Calculate the p-th percentile. http://onlinestatbook.com/2/introduction/percentiles.html
-// arr contains the values, p is the p-th percentile
+// Args:
+// arr: contains the values
+// p: the p-th percentile
 function percentile (arr, p) {
   var n = arr.length
   // sort array values in ascending order
@@ -58,16 +51,27 @@ function percentile (arr, p) {
 }
 
 // Calculates the 25th percentile (Q1)
+// Arg:
+// arr: array containing our data
 function firstQuartile (arr) {
   return percentile(arr, 25)
 }
 
+// Calculates the 50th percentile (median, Q2)
+// Arg:
+// arr: array containing our data
+function median (arr) { return percentile(arr, 50) }
+
 // Calculates the 75th percentile (Q3)
+// Arg:
+// arr: array containing our data
 function thirdQuartile (arr) {
   return percentile(arr, 75)
 }
 
 // Gets outliers that are outside of the range of Q3 + 1.5*IQR, and Q1 - 1.5*IQR. IQR = interquartile range.
+// Arg:
+// arr: array containing our data
 function getOutliers (arr) {
   let n = arr.length
 
@@ -89,6 +93,8 @@ function getOutliers (arr) {
 }
 
 // Calculate the lower and upper limits of the whiskers
+// Arg:
+// arr: array containing our data
 function lowerAndUpperLimits (arr) {
   var Q3 = thirdQuartile(arr)
   var Q1 = firstQuartile(arr)

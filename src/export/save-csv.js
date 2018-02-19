@@ -1,15 +1,20 @@
 const fs = require('fs')
 
-// Save results to CSV
-module.exports = function (filename, dataToSave, header, deliminator) {
+module.exports = saveToCSV
+
+// Save results to CSV (.txt, or other file)
+// Args:
+// filename: the name of the file and/or the file path
+// dataToSave: object, key-value pairs with the statistical results
+// header: array of strings, add a header to the two column (key-value) like this ['Statistics', 'Value']
+// deliminator: string, any character you want
+function saveToCSV (filename, dataToSave, header, deliminator) {
   // If arguments are missing
   if (arguments.length < 4) { throw new Error('You did not supply all the arguments!') }
 
   // This array will be saved to file
   let save = []
-
-  // The header contains the column names as an array: ['Percentile', 'Value']
-  if (header) { save.push(header.join(deliminator)) }
+  save.push(header.join(deliminator))
 
   // Get the object keys to iterate
   let keys = Object.keys(dataToSave)
