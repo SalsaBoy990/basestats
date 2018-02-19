@@ -1,7 +1,7 @@
 {
   "name": "basestats",
-  "version": "1.0.0",
-  "description": "A function that calculates basic statistics from arrays, array-like objects",
+  "version": "1.0.1",
+  "description": "A Node.js module that calculates basic statistics from arrays, array-like objects, JSON and data from MongoDB",
   "main": "main.js",
   "scripts": {
     "example-simple": "node ./example/example-simple.js",
