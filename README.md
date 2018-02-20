@@ -50,16 +50,16 @@ let pcs = $S.getAllPercentiles(sample)
 console.log('sample: ', pcs)
 
 // save the percentile results to file
-$S.saveToCSV('./results/sample.csv', pcs, ['Percentile', 'Value'], ';')
+$S.saveToCSV('sample.csv', pcs, ['Percentile', 'Value'], ';')
 
 // get basic stats from the array of numbers, save it
 let arr = $S.getBaseStats($S.vars, sample)
-$S.saveToCSV('./results/arr.csv', arr, ['Statistics', 'Value'], ';')
+$S.saveToCSV('arr.csv', arr, ['Statistics', 'Value'], ';')
 console.log('arr: ', arr)
 
 // calculate stats from the 'age' property of the 'person' object, save it
 let age = $S.getBaseStats($S.vars, $S.subsetByProperty(person, 'age'))
-$S.saveToCSV('./results/age.csv', age, ['Statistics', 'Value'], ';')
+$S.saveToCSV('age.csv', age, ['Statistics', 'Value'], ';')
 console.log('person (age): ', age)
 
 // log the stats from the 'height' property of the 'person' object
@@ -86,7 +86,7 @@ $S.getJSONFromURL('http://jsonvat.com/', function (err, body) {
   let stats = $S.getBaseStats($S.vars, vat)
 
   // save results to a file
-  $S.saveToCSV('./results/vat.csv', stats, ['Statistics', 'Value'], ';')
+  $S.saveToCSV('vat.csv', stats, ['Statistics', 'Value'], ';')
 })
 ```
 
@@ -141,27 +141,27 @@ query.exec(function (err, data) {
   let stats = $S.getBaseStats($S.vars, pageCount)
 
   // save results to a file
-  $S.saveToCSV('./results/bookPageCount.csv', stats, ['Statistics', 'Value'], ';')
+  $S.saveToCSV('bookPageCount.csv', stats, ['Statistics', 'Value'], ';')
 })
 ```
 
 
 ## Examples
 
-Navigate to `node_modules\basestats\example` in your project folder, and run
+Navigate to `node_modules\basestats` in your project folder, and run
 
-    npm example-simple
-    npm example-json
+    npm run example-simple
+    npm run example-json
 
 to calculate stats from simple arrays, objects, and JSON.
 
 For the MongoDB example, follow these instructions:
-1. Get JSON data from url, save it as a json file by running this script: `npm mongo-database-sample`
+1. Get JSON data from url, save it as a json file by running this script: `npm run db-sample`
 
 2. After that you have to import this file to the mongo database. Run this command (in one line):
   `mongoimport -db basestats-demo --collection books --type json --file books.json`
 
-3. And finally, run `npm example-mongo`. Otherwise, this example won't work!
+3. And finally, run `npm run example-mongo`. Otherwise, this example won't work!
 
 Note: I use the module called **mongoose** for the example. However, you need to have mongo installed on your computer. Just in case you are new to MongoDB:
 
@@ -191,9 +191,11 @@ Note: I use the module called **mongoose** for the example. However, you need to
 
 ## Change log
 
+20/02/2018: README errors and errors in the examples corrected
 
 ## Release Notes
 
+* 1.0.2 Minor corrections
 * 1.0.1 Module restructured
 * 1.0.0 Initial release
 

@@ -1,13 +1,13 @@
 {
   "name": "basestats",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Node.js module that calculates basic statistics from arrays, array-like objects, JSON and data from MongoDB",
   "main": "main.js",
   "scripts": {
-    "example-simple": "node ./example/example-simple.js",
-    "example-json": "node ./example/example-json.js",
     "db-sample": "node ./example/mongo-database-sample.js",
-    "example-mongo": "node ./example/example-mongo.js"
+    "example-json": "node ./example/example-json.js",
+    "example-mongo": "node ./example/example-mongo.js",
+    "example-simple": "node ./example/example-simple.js"
   },
   "repository": {
     "type": "git",

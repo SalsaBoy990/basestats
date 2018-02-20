@@ -20,5 +20,5 @@ $S.getJSONFromURL('http://jsonvat.com/', function (err, body) {
   let stats = $S.getBaseStats($S.vars, vat)
 
   // save results to a file
-  $S.saveToCSV('./results/vat.csv', stats, ['Statistics', 'Value'], ';')
+  $S.saveToCSV('./example/results/vat.csv', stats, ['Statistics', 'Value'], ';')
 })

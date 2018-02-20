@@ -16,7 +16,7 @@ $S.getJSONFromURL(url, function (err, body) {
   console.log(parsed)
 
   // Save data to file
-  let filename = 'books.json'
+  let filename = './example/books.json'
   fs.writeFile(filename, parsed, 'utf-8', (err) => {
     if (err) throw err
     console.log('Data successfully saved as ' + filename + '!')

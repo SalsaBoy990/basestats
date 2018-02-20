@@ -44,5 +44,5 @@ query.exec(function (err, data) {
   let stats = $S.getBaseStats($S.vars, pageCount)
 
   // save results to a file
-  $S.saveToCSV('./results/bookPageCount.csv', stats, ['Statistics', 'Value'], ';')
+  $S.saveToCSV('./example/results/bookPageCount.csv', stats, ['Statistics', 'Value'], ';')
 })

@@ -34,16 +34,16 @@ let pcs = $S.getAllPercentiles(sample)
 console.log('sample: ', pcs)
 
 // save the percentile results to file
-$S.saveToCSV('./results/sample.csv', pcs, ['Percentile', 'Value'], ';')
+$S.saveToCSV('./example/results/sample.csv', pcs, ['Percentile', 'Value'], ';')
 
 // get basic stats from the array of numbers, save it
 let arr = $S.getBaseStats($S.vars, sample)
-$S.saveToCSV('./results/arr.csv', arr, ['Statistics', 'Value'], ';')
+$S.saveToCSV('./example/results/arr.csv', arr, ['Statistics', 'Value'], ';')
 console.log('arr: ', arr)
 
 // calculate stats from the 'age' property of the 'person' object, save it
 let age = $S.getBaseStats($S.vars, $S.subsetByProperty(person, 'age'))
-$S.saveToCSV('./results/age.csv', age, ['Statistics', 'Value'], ';')
+$S.saveToCSV('./example/results/age.csv', age, ['Statistics', 'Value'], ';')
 console.log('person (age): ', age)
 
 // log the stats from the 'height' property of the 'person' object
